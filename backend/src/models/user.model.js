@@ -44,7 +44,7 @@ userSchema.methods.setUser=async function(){
         email: this.email
     }
 
-    return jwt.sign(payload,process.env.ACCESS_TOKEN_SECRET,{expiresIn: process.env.ACCESS_TOKEN_EXPIRY});
+    return jwt.sign(payload,"sankalp");
 }
 
 export const User=mongoose.model('User',userSchema);
