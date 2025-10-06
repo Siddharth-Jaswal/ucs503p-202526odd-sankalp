@@ -1,6 +1,7 @@
 import {app} from "./app.js";
 import {connectDb} from "./db/mongodb.js";
 import dotenv from "dotenv";
+import { whatsappSetup } from "./services/whatsapp.service.js";
 
 dotenv.config({
     path: './.env'
@@ -11,6 +12,7 @@ connectDb()
 .then(
     app.listen(port,()=>{
         console.log(`Listening at port ${port}`);
+        whatsappSetup();
     })
 )
 .catch((err)=>{

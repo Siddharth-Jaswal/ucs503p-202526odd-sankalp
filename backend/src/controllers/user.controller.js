@@ -28,7 +28,8 @@ const login=async(req,res)=>{
     const token=await user.setUser();
     res.cookie("accessToken",token,{
         httpOnly: true,
-        secure: true,
+        secure: false,
+        //sameSite: 'lax',
         maxAge: 3600000
     });
     res.json({status: 200, message: "User logged in successfully", user: user});

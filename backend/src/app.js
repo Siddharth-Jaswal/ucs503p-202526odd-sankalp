@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.route.js";
+import scheduleRouter from "./routes/schedule.route.js";
 
 const app=express();
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 // mount routes
 app.use('/api/users', userRouter);
+app.use('/api', scheduleRouter);
 
 app.get('/',(req,res)=>{
     res.send('HOMEPAGE');
