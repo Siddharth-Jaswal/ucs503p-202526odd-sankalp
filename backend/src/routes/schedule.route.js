@@ -18,5 +18,3 @@ router.delete('/schedule/:id',authenticate,deleteSchedule);
 router.get('/schedules',authenticate,listSchedules);
 
 export default router;
-
-
