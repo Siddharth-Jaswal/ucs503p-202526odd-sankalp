@@ -1,8 +1,9 @@
+import {Schema} from "mongoose";
 import mongoose from "mongoose";
 
-const scheduleSchema=new mongoose.Schema({
+const scheduleSchema=new Schema({
     user:{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
@@ -17,6 +18,10 @@ const scheduleSchema=new mongoose.Schema({
     cronTime:{
         type: String,
         required: true,
+    },
+    remainingRuns:{
+        type: Number,
+        default: 1,
     },
     active:{
         type: Boolean,

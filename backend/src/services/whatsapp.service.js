@@ -6,127 +6,93 @@ import { Schedule } from "../models/schedule.model.js";
 const { Client,LocalAuth }=pkg;
 
 const jobs={};
-
 let client;
 
-const formatLocalTime=(date)=>{
-    try{
-        const s=date.toLocaleTimeString('en-IN',{ hour: 'numeric',minute: '2-digit',second: '2-digit',hour12: true });
-        return s.replace('AM','am').replace('PM','pm');
-    }catch(err){
-        return date.toLocaleTimeString().toLowerCase();
-    }
-}
-
-const getNextRunDescription=(cronExpr)=>{
-    try{
-        const parts=cronExpr.trim().split(/\s+/);
-        const now=new Date();
-        let target=new Date(now.getTime());
-
-        if(parts.length === 6){
-            const [sec,min,hour,d,m,w]=parts;
-            if(d === '*' && m === '*' && w === '*'){
-                target.setSeconds(Number(sec));
-                target.setMinutes(Number(min));
-                target.setHours(Number(hour));
-                target.setMilliseconds(0);
-                if(target <= now){
-                    target=new Date(target.getTime() + 24*60*60*1000);
-                }
-                return formatLocalTime(target);
-            }
-        }
-        if(parts.length === 5){
-            const [min,hour,d,m,w]=parts;
-            if(d === '*' && m === '*' && w === '*'){
-                target.setSeconds(0);
-                target.setMinutes(Number(min));
-                target.setHours(Number(hour));
-                target.setMilliseconds(0);
-                if(target <= now){
-                    target=new Date(target.getTime() + 24*60*60*1000);
-                }
-                return formatLocalTime(target);
-            }
-        }
-    }catch(err){
-        //ignore
-    }
-    return undefined;
-}
-
-const scheduleMessage=(doc)=>{
-    const id=String(doc._id);
-    if (jobs[id]){
-        jobs[id].stop();
-    }
-
-    const nextRun=getNextRunDescription(doc.cronTime);
-    if(nextRun){
-        console.log(`Scheduled message for ~${nextRun} (server local time) ${id} for ${doc.phone} (${doc.cronTime})`);
-    }else{
-        console.log(`Scheduled message ${id} for ${doc.phone} (${doc.cronTime})`);
-    }
-
-    const job=cron.schedule(doc.cronTime,async()=>{
-        try{
-            await client.sendMessage(`${doc.phone}@c.us`,doc.message);
-            console.log(`Message sent to ${doc.phone} at ${formatLocalTime(new Date())}`);
-        }catch(err){
-            console.error("Send failed:",err);
-        }
+const whatsappSetup=()=>{
+    if(client) return client;
+  
+    client=new Client({
+      authStrategy: new LocalAuth(),
+      puppeteer: { headless: true,args: ["--no-sandbox","--disable-setuid-sandbox"] },
     });
-
-    jobs[id]=job;
-}
+  
+    client.on("qr",(qr)=>{
+      qrcode.generate(qr,{ small: true });
+      console.log("Scan QR code to connect WhatsApp");
+    });
+  
+    client.on("ready",async()=>{
+      console.log("WhatsApp ready");
+      await loadAllSchedules();
+    });
+  
+    client.initialize();
+    return client;
+};
 
 const loadAllSchedules=async()=>{
     const schedules=await Schedule.find({ active: true });
     schedules.forEach(scheduleMessage);
-}
+    console.log(`Loaded ${schedules.length} active schedules`);
+};
+
+const phoneToID=async(phone)=>{
+  try{
+    const phoneNo=String(phone).replace(/[^0-9]/g,"");
+    const numberId=await client.getNumberId(phoneNo);
+    if(!numberId){
+      console.log(`Skipped: invalid WhatsApp number ${phoneNo}`);
+      return null;
+    }
+    return numberId._serialized; //919876543210@c.us
+  }catch(err){
+    console.error("phoneToID failed:",err.message);
+    return null;
+  }
+};
+
+const scheduleMessage=(doc)=>{
+  const id=String(doc._id);
+
+  const job=cron.schedule(doc.cronTime,async()=>{
+    try{
+      const chatId=await phoneToID(doc.phone);
+      if(!chatId) return;
+
+      await client.sendMessage(chatId,doc.message);
+      console.log(`Sent to ${doc.phone}`);
+      
+      const updatedSchedule=await Schedule.findById(doc._id);
+      updatedSchedule.remainingRuns--;
+      await updatedSchedule.save();
+
+      if(updatedSchedule.remainingRuns===0){
+          updatedSchedule.active=false;
+          await updatedSchedule.save();
+          if(jobs[id]){
+            jobs[id].stop();
+            delete jobs[id];
+          }
+      }
+    }catch(err){
+      console.error("Send failed:",err.message);
+    }
+  });
+
+  jobs[id]=job;
+  console.log(`Scheduled job for ${id} at cron: ${doc.cronTime}`);
+};
 
 const cancelScheduleById=async(id)=>{
-    const job=jobs[id];
-    if(job){
-        job.stop();
-        delete jobs[id];
-    }
-}
-
-const whatsappSetup=()=>{
-    if(client){
-        return client;
-    }
-
-    client=new Client({
-        authStrategy: new LocalAuth(),
-        puppeteer: {
-            headless: true,
-            args: ["--no-sandbox","--disable-setuid-sandbox"],
-        },
-    });
-
-    client.on("qr",(qr) => {
-        qrcode.generate(qr,{ small: true });
-        console.log("Scan QR code to connect WhatsApp.");
-    });
-
-    client.on("ready",async () => {
-        console.log("WhatsApp is ready!");
-        await loadAllSchedules();
-    });
-
-    client.initialize();
-
-    return client;
-}
+  if(jobs[id]){
+    jobs[id].stop();
+    delete jobs[id];
+  }
+};
 
 export {
     whatsappSetup,
     scheduleMessage,
     loadAllSchedules,
-    cancelScheduleById
+    cancelScheduleById 
 };
-
-
