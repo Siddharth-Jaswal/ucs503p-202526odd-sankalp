@@ -1,126 +1,116 @@
-<div id="project-overview">
-    <h1># LifeAura AI – SANKALP</h1>
+# LifeAura AI – SANKALP
 
-    <p>
-        LifeAura AI is an intelligent health management platform designed to assist users with <b>medication reminders</b>, <b>quick symptom guidance</b>, and <b>AI-powered analysis</b> for minor health issues. 
-        Built with a focus on accessibility and reliability, it serves as a digital health companion for individuals and caregivers alike.
-    </p>
+LifeAura AI is an intelligent health management platform designed to assist users with **medication reminders**, **quick symptom guidance**, and **AI-powered analysis** for minor health issues. Built with a focus on accessibility and reliability, it serves as a digital health companion for individuals and caregivers alike.
 
-    <hr>
+---
 
-    <h2>Features</h2>
-    <ul>
-        <li><b>MERN-based Web App</b> – Full-stack application with a modern, scalable architecture.</li>
-        <li><b>Medication Scheduling & Reminders</b> – Automated WhatsApp/SMS notifications to prevent missed doses.</li>
-        <li><b>Prescription Digitization</b> – OCR-based scanning for easy tracking of medications.</li>
-        <li><b>AI Chatbot</b> – Symptom-checking assistant for instant health guidance.</li>
-        <li><b>Skin Condition Analysis</b> – AI-driven image analysis for basic dermatological support.</li>
-    </ul>
+## Features
+* **MERN-based Web App** – Full-stack application with a modern, scalable architecture.
+* **Medication Scheduling & Reminders** – Automated WhatsApp/SMS notifications to prevent missed doses.
+* **Prescription Digitization** – OCR-based scanning for easy tracking of medications.
+* **AI Chatbot** – Symptom-checking assistant for instant health guidance.
+* **Skin Condition Analysis** – AI-driven image analysis for basic dermatological support.
 
-    <hr>
+---
 
-    <h2>Target Users</h2>
-    <ul>
-        <li><b>Elderly Individuals</b> – Simplified interface for ease of use.</li>
-        <li><b>People with Chronic Conditions</b> – Consistent reminders and health monitoring.</li>
-        <li><b>Caregivers</b> – Better patient management tools.</li>
-        <li><b>General Health-Conscious Users</b> – Quick, reliable first-aid and symptom guidance.</li>
-    </ul>
+## Target Users
+* **Elderly Individuals** – Simplified interface for ease of use.
+* **People with Chronic Conditions** – Consistent reminders and health monitoring.
+* **Caregivers** – Better patient management tools.
+* **General Health-Conscious Users** – Quick, reliable first-aid and symptom guidance.
 
-    <b>Key User Needs:</b>
-    <ul>
-        <li>Simple, user-friendly design</li>
-        <li>Large fonts & clear instructions</li>
-        <li>Quick, reliable responses</li>
-    </ul>
+**Key User Needs:**
+* Simple, user-friendly design
+* Large fonts & clear instructions
+* Quick, reliable responses
 
-    <hr>
+---
 
-    <h2>Security & Privacy</h2>
-    <p>LifeAura AI prioritizes data protection with:</p>
-    <ul>
-        <li>End-to-end encryption for sensitive health data</li>
-        <li>API calls secured with HTTPS & AES-256 encryption at rest</li>
-        <li>JWT-based authentication with role-based access control</li>
-    </ul>
+## Security & Privacy
+LifeAura AI prioritizes data protection with:
+* End-to-end encryption for sensitive health data
+* API calls secured with HTTPS & AES-256 encryption at rest
+* JWT-based authentication with role-based access control
 
-    <hr>
+---
 
-    <h2>Tech Stack</h2>
-    <ul>
-        <li><b>Frontend:</b> React.js</li>
-        <li><b>Backend:</b> Node.js, Express.js</li>
-        <li><b>Database:</b> MongoDB</li>
-        <li><b>AI/ML Components:</b> Symptom-checking chatbot & image analysis models</li>
-        <li><b>Communication:</b> WhatsApp & SMS integration</li>
-    </ul>
+## Tech Stack
+* **Frontend:** React.js
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB
+* **AI/ML Components:** Symptom-checking chatbot & image analysis models
+* **Communication:** WhatsApp & SMS integration
 
-    <hr>
+---
 
-    <h2>Project Roadmap</h2>
-    <ol>
-        <li>Initial design & scope finalization</li>
-        <li>Implement MERN stack setup with authentication & user profiles</li>
-        <li>Integrate OCR, AI chatbot & skin image analysis</li>
-        <li>Deploy production-ready health companion platform</li>
-    </ol>
-</div>
+## Project Roadmap
+1. Initial design & scope finalization
+2. Implement MERN stack setup with authentication & user profiles
+3. Integrate OCR, AI chatbot & skin image analysis
+4. Deploy production-ready health companion platform
 
-<hr style="border: 4px solid #333; margin: 40px 0;">
-<div id="project-setup-guide">
-    <h1>Project Setup Guide</h1>
-    <p>
-        This guide explains how to <strong>install dependencies</strong>, <strong>configure environment variables</strong>, and <strong>run all servers</strong> (Backend, Frontend, and ML) locally.
-    </p>
+---
+***
+---
 
-    <hr>
+# 🚀 Project Setup Guide
 
-    <h2>🐍 Python/ML Setup</h2>
-    <p>This setup is for the Python-based Machine Learning server.</p>
+This guide explains how to **install dependencies**, **configure environment variables**, and **run all servers** (Backend, Frontend, and ML) locally.
 
-    <p>1️⃣ Create <code>.env</code> file</p>
-    <p><strong>Location:</strong> <code>./ml/</code></p>
-    <ul>
-        <li><code>GITHUB_API_KEY=your_github_api_key_here</code></li>
-    </ul>
+---
 
-    <p>Install dependencies</p>
-    <pre><code>cd ml
-pip install -r requirements.txt</code></pre>
+## Python/ML Setup
+This setup is for the Python-based Machine Learning server.
 
-    <p>Run Server</p>
-    <pre><code>python test_server_pythonic.py</code></pre>
+### 1. Environment Variables
+Create a file named **`.env`** inside the `./ml/` directory and add the following variable:
+```env
+GITHUB_API_KEY=your_github_api_key_here
 
-    <hr>
+### 2. Install Dependencies
+Navigate to the ./ml/ directory and install the required Python packages:
 
-    <h2>🌐 Frontend Setup</h2>
-    <p>This setup is for the web user interface.</p>
+cd ml
+pip install -r requirements.txt
 
-    <p>Install dependencies</p>
-    <pre><code>cd frontend
-npm install</code></pre>
+### 3. Run Server
+Start the ML server:
 
-    <p>Run Server</p>
-    <pre><code>npm run dev</code></pre>
+python test_server_pythonic.py
 
-    <hr>
+---
 
-    <h2>⚙️ Backend Setup</h2>
-    <p>This setup is for the main application programming interface (API).</p>
+## Frontend Setup
+This setup is for the web user interface.
+### 1. Install Dependencies
+Navigate to the ./frontend/ directory and install the required Node.js packages:
 
-    <p>1️⃣ Create <code>.env</code> file</p>
-    <p><strong>Location:</strong> <code>./backend/</code></p>
-    <ul>
-        <li><code>PORT=3000</code></li>
-        <li><code>CORS_ORIGIN=http://localhost:5173</code></li>
-        <li><code>ACCESS_TOKEN_SECRET=your_long_secure_secret_here</code></li>
-        <li><code>ACCESS_TOKEN_EXPIRY=1h</code></li>
-    </ul>
+cd frontend
+npm install
 
-    <p>Install dependencies</p>
-    <pre><code>cd backend
-npm install</code></pre>
+### 2. Run Server
+npm run dev
 
-    <p>Run Server</p>
-    <pre><code>npm run dev</code></pre>
-</div>
+---
+
+## Backend Setup
+This setup is for the main application programming interface (API).
+### 1. Environment Variables
+Create a file named **`.env`** inside the `./backend/` directory and add the following variable:
+```env
+
+PORT=3000
+CORS_ORIGIN=http://localhost:5173
+ACCESS_TOKEN_SECRET=your_long_secure_secret_here
+ACCESS_TOKEN_EXPIRY=1h
+
+### 2. Install Dependencies
+Navigate to the ./backend/ directory and install the required Node.js packages:
+
+cd backend
+npm install
+
+### 3. Run Server
+npm run dev
+
+---
