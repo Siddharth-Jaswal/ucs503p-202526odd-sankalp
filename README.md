@@ -1,6 +1,6 @@
 # LifeAura AI – SANKALP
 
-* **Deployed Link:** life-aura.vercel.app
+* **Deployed Link:** [life-aura.vercel.app](https://life-aura.vercel.app)
 
 LifeAura AI is an intelligent health management platform designed to assist users with **medication reminders**, **quick symptom guidance**, and **AI-powered analysis** for minor health issues. Built with a focus on accessibility and reliability, it serves as a digital health companion for individuals and caregivers alike.
 
