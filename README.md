@@ -64,7 +64,7 @@ This setup is for the Python-based Machine Learning server.
 
 ### 1. Environment Variables
 Create a file named **`.env`** inside the `./ml/` directory and add the following variable:
-```env
+
 GITHUB_API_KEY=your_github_api_key_here
 
 ### 2. Install Dependencies
@@ -97,7 +97,6 @@ npm run dev
 This setup is for the main application programming interface (API).
 ### 1. Environment Variables
 Create a file named **`.env`** inside the `./backend/` directory and add the following variable:
-```env
 
 PORT=3000
 CORS_ORIGIN=http://localhost:5173
