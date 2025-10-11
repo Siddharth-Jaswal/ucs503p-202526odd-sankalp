@@ -64,19 +64,19 @@ This setup is for the Python-based Machine Learning server.
 
 ### 1. Environment Variables
 Create a file named **`.env`** inside the `./ml/` directory and add the following variable:
-```env
-GITHUB_API_KEY=your_github_api_key_here
+
+* GITHUB_API_KEY=your_github_api_key_here
 
 ### 2. Install Dependencies
 Navigate to the ./ml/ directory and install the required Python packages:
 
-cd ml
-pip install -r requirements.txt
+* cd ml
+* pip install -r requirements.txt
 
 ### 3. Run Server
 Start the ML server:
 
-python test_server_pythonic.py
+* python test_server_pythonic.py
 
 ---
 
@@ -85,11 +85,11 @@ This setup is for the web user interface.
 ### 1. Install Dependencies
 Navigate to the ./frontend/ directory and install the required Node.js packages:
 
-cd frontend
-npm install
+* cd frontend
+* npm install
 
 ### 2. Run Server
-npm run dev
+* npm run dev
 
 ---
 
@@ -97,20 +97,19 @@ npm run dev
 This setup is for the main application programming interface (API).
 ### 1. Environment Variables
 Create a file named **`.env`** inside the `./backend/` directory and add the following variable:
-```env
 
-PORT=3000
-CORS_ORIGIN=http://localhost:5173
-ACCESS_TOKEN_SECRET=your_long_secure_secret_here
-ACCESS_TOKEN_EXPIRY=1h
+* PORT=3000
+* CORS_ORIGIN=http://localhost:5173
+* ACCESS_TOKEN_SECRET=your_long_secure_secret_here
+* ACCESS_TOKEN_EXPIRY=1h
 
 ### 2. Install Dependencies
 Navigate to the ./backend/ directory and install the required Node.js packages:
 
-cd backend
-npm install
+* cd backend
+* npm install
 
 ### 3. Run Server
-npm run dev
+* npm run dev
 
 ---
