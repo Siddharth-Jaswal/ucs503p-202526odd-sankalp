@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { Login } from './pages/Login.jsx'
-import { Register } from './pages/Register.jsx'
+import {Login} from './pages/Login.jsx'
+import {Register} from './pages/Register.jsx'
 import Prescription from './pages/Prescription.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
-import RedirectIfAuth from './components/RedirectIfAuth.jsx'
+import RedirectIfAuth from './components/RedirectAuth.jsx'
 
 function App() {
   return (
