@@ -7,7 +7,7 @@ import requests
 # -------------------------------------------------
 # 0️⃣ Streamlit Page Config
 # -------------------------------------------------
-st.set_page_config(page_title="Caresentry | AI Disease Predictor", page_icon="🩺", layout="wide")
+st.set_page_config(page_title="LifeAura AI Disease Predictor", page_icon="🩺", layout="wide")
 
 # -------------------------------------------------
 # 1️⃣ Load Model and Metadata
@@ -185,7 +185,7 @@ disease_info = load_disease_info()
 # -------------------------------------------------
 # 3️⃣ Streamlit UI
 # -------------------------------------------------
-st.title("CareSentryAI Disease Predictor")
+st.title("LifeAura AI Disease Predictor")
 st.markdown("---")
 
 st.header("🧬 Select Your Symptoms")
