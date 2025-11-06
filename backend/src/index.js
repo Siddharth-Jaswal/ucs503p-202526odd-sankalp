@@ -1,21 +1,21 @@
-import {app} from "./app.js";
-import {connectDb} from "./db/mongodb.js";
+import { app } from "./app.js";
+import { connectDb } from "./db/mongodb.js";
 import dotenv from "dotenv";
-import { whatsappSetup } from "./services/whatsapp.service.js";
+import { telegramSetup } from "./services/telegram.service.js";
 
 dotenv.config({
-    path: './.env'
+  path: "./.env",
 });
-const port=3000;
+
+const port = process.env.PORT || 3000;
 
 connectDb()
-.then(
-    app.listen(port,()=>{
-        console.log(`Listening at port ${port}`);
-        whatsappSetup();
+  .then(
+    app.listen(port, () => {
+      console.log(`Listening at port ${port}`);
+      telegramSetup();
     })
-)
-.catch((err)=>{
+  )
+  .catch((err) => {
     console.log(err);
-});
-
+  });
