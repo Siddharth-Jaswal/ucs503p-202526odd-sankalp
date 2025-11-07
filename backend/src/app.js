@@ -3,31 +3,40 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.route.js";
 import scheduleRouter from "./routes/schedule.route.js";
+import prescriptionRouter from "./routes/prescription.route.js";
+import predictRouter from "./routes/predict.route.js";
+import debugRouter from "./routes/debug.route.js";
 
-const app=express();
+const app = express();
 
-//setup inbuilt middlewares and imported ones
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true
+origin: "*",
+credentials: true
 }));
-app.use(express.json({
+
+app.use(
+  express.json({
     limit: "16kb",
-}));
-app.use(express.urlencoded({
+  })
+);
+app.use(
+  express.urlencoded({
     limit: "16kb",
     extended: true,
-}));
+  })
+);
 app.use(express.static("public"));
 app.use(cookieParser());
 
 // mount routes
-app.use('/api/users', userRouter);
-app.use('/api', scheduleRouter);
+app.use("/api/users", userRouter);
+app.use("/api", scheduleRouter);
+app.use("/api", prescriptionRouter);
+app.use("/api", predictRouter);
+app.use("/api/debug", debugRouter);
 
-app.get('/',(req,res)=>{
-    res.send('HOMEPAGE');
-})
+app.get("/", (req, res) => {
+  res.send("HOMEPAGE");
+});
 
-
-export {app};
+export { app };
