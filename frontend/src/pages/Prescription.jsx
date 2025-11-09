@@ -1,17 +1,20 @@
-import { useState } from 'react'
-import Upload from '../components/Upload.jsx'
-import ScheduleSetup from '../components/ScheduleSetup.jsx'
+import { useState } from "react";
+import Upload from "../components/upload";
+import Prescriptions from "../components/prescriptions.jsx";
+import PageWrapper from "../components/PageWrapper";
 
-export default function Prescription(){
-  const [result,setResult]=useState('')
-  const [extracted,setExtracted]=useState(null)
+export default function Prescription() {
+  const [result, setResult] = useState("");
+  const [extracted, setExtracted] = useState(null);
 
   return (
-    <div className="min-h-[70vh] grid md:grid-cols-2 gap-4">
-      <Upload setExtracted={setExtracted} result={result} setResult={setResult} />
-      <ScheduleSetup extracted={extracted} />
-    </div>
-  )
+    <PageWrapper>
+      <div className="space-y-6">
+        <div className="min-h-[50vh] flex items-center justify-center">
+          <Upload setExtracted={setExtracted} result={result} setResult={setResult} />
+        </div>
+        <Prescriptions extracted={extracted} />
+      </div>
+    </PageWrapper>
+  );
 }
-
-
